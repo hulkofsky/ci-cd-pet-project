@@ -30,7 +30,7 @@ jobs:
         run: pnpm install
 
       - name: Run linter
-        run: pnpm run lint --stream
+        run: pnpm run lint --stdin
 
       - name: Run tests
         run: pnpm run test --stream
