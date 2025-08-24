@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "lint": "pnpm run --filter './*' lint",
-    "test": "pnpm run --filter './*' test"
+    "lint": "pnpm --filter './*' lint",
+    "test": "pnpm --filter './*' test"
   },
   "keywords": [],
   "author": "",
