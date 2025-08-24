@@ -13,11 +13,11 @@
   "devDependencies": {
     "@types/jest": "^29.5.12",
     "eslint": "^8.57.0",
-    "packageManager": "pnpm@8.0.0",
     "prettier": "^3.3.3"
   },
   "workspaces": [
     "user-service",
     "auth-service"
-  ]
+  ],
+  "packageManager": "pnpm@8.0.0"
 }
