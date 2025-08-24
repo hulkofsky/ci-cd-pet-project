@@ -1,0 +1,25 @@
+# Dependency folders for all services
+node_modules/
+**/node_modules/
+
+# Build artifacts
+dist/
+**/dist/
+
+# IDE files
+.vscode/
+
+# Environment variables
+.env
+.env.local
+
+# Database data folders
+db_data/
+user_db_data/
+auth_db_data/
+
+# OS specific files
+.DS_Store
+
+# Git specific files
+.git
