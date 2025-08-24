@@ -1,0 +1,22 @@
+{
+  "name": "ci_cd_pet_project",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "lint": "pnpm run lint --stream",
+    "test": "pnpm run test --stream"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/jest": "^29.5.12",
+    "eslint": "^8.57.0",
+    "prettier": "^3.3.3"
+  },
+  "workspaces": [
+    "user-service",
+    "auth-service"
+  ]
+}
