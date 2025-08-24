@@ -1,0 +1,65 @@
+version: '3.8'
+services:
+  user_service:
+    build: ./user-service
+    container_name: user_service
+    ports:
+      - '3000:3000'
+    depends_on:
+      user_db:
+        condition: service_healthy
+    environment:
+      DATABASE_HOST: user_db
+      DATABASE_PORT: 5432
+      DATABASE_USERNAME: postgres
+      DATABASE_PASSWORD: your_strong_password
+      DATABASE_NAME: user_service_db
+  
+  auth_service:
+    build: ./auth-service
+    container_name: auth_service
+    ports:
+      - '3001:3001'
+    depends_on:
+      auth_db:
+        condition: service_healthy
+    environment:
+      DATABASE_HOST: auth_db
+      DATABASE_PORT: 5432
+      DATABASE_USERNAME: postgres
+      DATABASE_PASSWORD: your_strong_password
+      DATABASE_NAME: auth_service_db
+  
+  user_db:
+    image: postgres:15-alpine
+    container_name: user_db
+    ports:
+      - '5432:5432'
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: your_strong_password
+      POSTGRES_DB: user_service_db
+    volumes:
+      - ./user_db_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+  
+  auth_db:
+    image: postgres:15-alpine
+    container_name: auth_db
+    ports:
+      - '5433:5432'
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: your_strong_password
+      POSTGRES_DB: auth_service_db
+    volumes:
+      - ./auth_db_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
