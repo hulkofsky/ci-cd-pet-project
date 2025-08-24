@@ -15,15 +15,14 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Set up Node.js
+      - name: Set up Node.js and pnpm
         uses: actions/setup-node@v4
         with:
           node-version: '22'
           cache: 'pnpm'
           cache-dependency-path: './user-service/pnpm-lock.yaml'
-
-      - name: Install pnpm
-        run: npm install -g pnpm
+          registry-url: 'https://registry.npmjs.org'
+          package-manager: 'pnpm'
 
       - name: Install dependencies
         run: pnpm install --dir ./user-service
@@ -40,15 +39,14 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Set up Node.js
+      - name: Set up Node.js and pnpm
         uses: actions/setup-node@v4
         with:
           node-version: '22'
           cache: 'pnpm'
           cache-dependency-path: './auth-service/pnpm-lock.yaml'
-
-      - name: Install pnpm
-        run: npm install -g pnpm
+          registry-url: 'https://registry.npmjs.org'
+          package-manager: 'pnpm'
 
       - name: Install dependencies
         run: pnpm install --dir ./auth-service
