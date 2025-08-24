@@ -15,22 +15,28 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v3
-        with:
-          version: 8
-
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '20'
           cache: 'pnpm'
 
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v3
+        with:
+          version: 8
+
       - name: Install dependencies
         run: pnpm install
 
-      - name: Run linter
-        run: pnpm run lint --stdin
+      - name: Run linter for user-service
+        run: pnpm --filter user-service run lint
 
-      - name: Run tests
-        run: pnpm run test --stream
+      - name: Run linter for auth-service
+        run: pnpm --filter auth-service run lint
+        
+      - name: Run tests for user-service
+        run: pnpm --filter user-service run test
+
+      - name: Run tests for auth-service
+        run: pnpm --filter auth-service run test
