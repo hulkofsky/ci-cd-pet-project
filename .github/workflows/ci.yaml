@@ -9,58 +9,28 @@ on:
       - master
 
 jobs:
-  build-and-test-user-service:
+  build-and-test-all:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '22'
-          cache: 'pnpm'
-
       - name: Setup pnpm
         uses: pnpm/action-setup@v3
         with:
           version: 8
-          run_install: false
-          standalone: true
 
-      - name: Install dependencies
-        run: pnpm install --dir ./user-service
-
-      - name: Run linter
-        run: pnpm run lint --filter user-service
-
-      - name: Run tests
-        run: pnpm run test --filter user-service
-
-  build-and-test-auth-service:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Setup Node.js
+      - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '22'
+          node-version: '20'
           cache: 'pnpm'
 
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v3
-        with:
-          version: 8
-          run_install: false
-          standalone: true
-
       - name: Install dependencies
-        run: pnpm install --dir ./auth-service
+        run: pnpm install
 
       - name: Run linter
-        run: pnpm run lint --filter auth-service
+        run: pnpm run lint --stream
 
       - name: Run tests
-        run: pnpm run test --filter auth-service
+        run: pnpm run test --stream
