@@ -21,12 +21,20 @@ jobs:
           node-version: '22'
           cache: 'pnpm'
 
-      - name: Install dependencies and run tests
-        run: |
-          npm install -g pnpm
-          pnpm install --dir ./user-service
-          pnpm run lint --filter user-service
-          pnpm run test --filter user-service
+      - name: Install pnpm globally
+        run: npm install -g pnpm
+
+      - name: Add pnpm to PATH
+        run: echo "$HOME/.npm-global/bin" >> $GITHUB_PATH
+
+      - name: Install dependencies
+        run: pnpm install --dir ./user-service
+
+      - name: Run linter
+        run: pnpm run lint --filter user-service
+
+      - name: Run tests
+        run: pnpm run test --filter user-service
 
   build-and-test-auth-service:
     runs-on: ubuntu-latest
@@ -40,9 +48,17 @@ jobs:
           node-version: '22'
           cache: 'pnpm'
 
-      - name: Install dependencies and run tests
-        run: |
-          npm install -g pnpm
-          pnpm install --dir ./auth-service
-          pnpm run lint --filter auth-service
-          pnpm run test --filter auth-service
+      - name: Install pnpm globally
+        run: npm install -g pnpm
+
+      - name: Add pnpm to PATH
+        run: echo "$HOME/.npm-global/bin" >> $GITHUB_PATH
+
+      - name: Install dependencies
+        run: pnpm install --dir ./auth-service
+
+      - name: Run linter
+        run: pnpm run lint --filter auth-service
+
+      - name: Run tests
+        run: pnpm run test --filter auth-service
